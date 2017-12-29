@@ -10,23 +10,23 @@ import app.dao.*;
 import app.entity.*;
 
 /**
- * Classe que representa a camada de negócios de RoleBusiness
+ * Classe que representa a camada de negócios de TelefoneBusiness
  * 
  * @generated
  **/
-@Service("RoleBusiness")
-public class RoleBusiness {
+@Service("TelefoneBusiness")
+public class TelefoneBusiness {
 
 
 
   /**
-   * Instância da classe RoleDAO que faz o acesso ao banco de dados
+   * Instância da classe TelefoneDAO que faz o acesso ao banco de dados
    * 
    * @generated
    */
   @Autowired
-  @Qualifier("RoleDAO")
-  protected RoleDAO repository;
+  @Qualifier("TelefoneDAO")
+  protected TelefoneDAO repository;
 
   // CRUD
 
@@ -35,10 +35,10 @@ public class RoleBusiness {
    * 
    * @generated
    */
-  public Role post(final Role entity) throws Exception {
+  public Telefone post(final Telefone entity) throws Exception {
     // begin-user-code  
     // end-user-code  
-    Role result = repository.save(entity);
+    Telefone result = repository.save(entity);
     // begin-user-code
     // end-user-code
     return result;
@@ -49,10 +49,10 @@ public class RoleBusiness {
    * 
    * @generated
    */
-  public Role put(final Role entity) throws Exception {
+  public Telefone put(final Telefone entity) throws Exception {
     // begin-user-code  
     // end-user-code
-    Role result = repository.saveAndFlush(entity);
+    Telefone result = repository.saveAndFlush(entity);
     // begin-user-code
     // end-user-code
     return result;
@@ -64,7 +64,7 @@ public class RoleBusiness {
    * @generated
    */
   public void delete(java.lang.String id) throws Exception {
-    Role entity = this.get(id);
+    Telefone entity = this.get(id);
     // begin-user-code  
     // end-user-code
     this.repository.delete(entity);
@@ -77,10 +77,10 @@ public class RoleBusiness {
    * 
    * @generated
    */
-  public Role get(java.lang.String id) throws Exception {
+  public Telefone get(java.lang.String id) throws Exception {
     // begin-user-code  
     // end-user-code
-    Role result = repository.findOne(id);
+    Telefone result = repository.findOne(id);
     // begin-user-code
     // end-user-code
     return result;
@@ -93,50 +93,38 @@ public class RoleBusiness {
    * 
    * @generated
    */
-  public Page<Role> list(Pageable pageable){
+  public Page<Telefone> list(Pageable pageable){
     // begin-user-code
     // end-user-code
-    Page<Role> result = repository.list(pageable);
+    Page<Telefone> result = repository.list(pageable);
     // begin-user-code
     // end-user-code
     return result;
   }
-  
   /**
-   * @generated modifiable
-   * OneToMany Relation
-   */  
-  public Page<UserRole> findUserRole(java.lang.String id, Pageable pageable) {
+   * Foreign Key cliente
+   * @generated
+   */
+  public Page<Telefone> findTelefonesByCliente(java.lang.String instanceId, Pageable pageable) {
     // begin-user-code
     // end-user-code  
-    Page<UserRole> result = repository.findUserRole(id, pageable);
+    Page<Telefone> result = repository.findTelefonesByCliente(instanceId, pageable);
     // begin-user-code  
     // end-user-code        
-    return result;    
-  }
-  /**
-   * @generated modifiable
-   * ManyToMany Relation
-   */  
-  public Page<User> listUser(java.lang.String id, Pageable pageable) {
-    // begin-user-code
-    // end-user-code  
-    Page<User> result = repository.listUser(id, pageable);
-    // begin-user-code
-    // end-user-code
-    return result;            
+    return result;
   }
   
   /**
-   * @generated modifiable
-   * ManyToMany Relation
-   */    
-  public int deleteUser(java.lang.String instanceId, java.lang.String relationId) {
+   * Foreign Key funcionario
+   * @generated
+   */
+  public Page<Telefone> findTelefonesByFuncionario(java.lang.String instanceId, Pageable pageable) {
     // begin-user-code
     // end-user-code  
-    int result = repository.deleteUser(instanceId, relationId);
-    // begin-user-code
-    // end-user-code  
-    return result;  
+    Page<Telefone> result = repository.findTelefonesByFuncionario(instanceId, pageable);
+    // begin-user-code  
+    // end-user-code        
+    return result;
   }
+  
 }

@@ -80,6 +80,12 @@ var app = (function() {
           controller: 'HomeController',
           templateUrl: 'views/logged/home.view.html'
         })
+        
+        .state('bemvindo', {
+          url: "/bemvindo",
+          controller: 'HomeController',
+          templateUrl: 'views/logged/bemvindo.view.html'
+        })
 
         .state('home.pages', {
           url: "/{name:.*}",

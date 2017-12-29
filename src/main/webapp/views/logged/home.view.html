@@ -1,7 +1,7 @@
   <div class="component-holder ng-binding ng-scope" data-component="crn-sidebar" id="crn-sidebar-986427">
   <div class="nav-side-menu navbar-default"> 
     <div class="brand"> 
-      <img src="img/logo.png" class="" width="" height="30"> 
+      <br>
     </div> 
     <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content1"></i> 
     <div class="menu-list"> 
@@ -40,12 +40,30 @@
                 <li><a href="#/home/admin/role" class="component-holder" data-component="crn-anchor">{{"Home.view.Roles" | translate}}</a></li> 
             </ul> 
         </li> 
-        <li data-toggle="collapse" data-component="crn-sidebar-item" data-target="#menu-sub-9831" class="collapsed component-holder"> </li> 
-      </ul> 
+        <li data-toggle="collapse" data-component="crn-sidebar-item" data-target="#menu-sub-7942" class="collapsed active component-holder"><a href="javascript:void(0);" class="">
+            <i class="fa fa-users fa-lg"></i> <span>Cadastros</span> <span class="arrow"></span></a>
+            <ul class="sub-menu collapse" id="menu-sub-7942"> 
+            <li><a href="#/home/logged/funcionario" class="component-holder" data-component="crn-anchor">Funcionários</a></li> 
+                <li><a href="#/home/logged/cliente" class="component-holder" data-component="crn-anchor">Clientes</a></li>
+                <li><a href="#/home/logged/telefone" class="component-holder" data-component="crn-anchor">Telefones</a></li> 
+                <li><a href="#/home/logged/endereco" class="component-holder" data-component="crn-anchor">Endereços</a></li>
+                <li><a href="#/home/logged/servico" class="component-holder" data-component="crn-anchor">Serviços</a></li> 
+             </ul> </li>
+             
+             <li data-toggle="collapse" data-component="crn-sidebar-item" data-target="#menu-sub-7943" class="collapsed active component-holder"><a href="javascript:void(0);" class="">
+            <i class="fa fa-users fa-lg"></i> <span>Agenda</span> <span class="arrow"></span></a>
+            <ul class="sub-menu collapse" id="menu-sub-7943"> 
+            <li><a href="#/home/logged/agendamentocadastro" class="component-holder" data-component="crn-anchor">Agendamento</a></li> 
+                <li><a href="#/home/logged/agendamentocliente" class="component-holder" data-component="crn-anchor">Histórico por cliente</a></li>
+                <li><a href="#/home/logged/agendamentofuncionario" class="component-holder" data-component="crn-anchor">Histórico por funcionário</a></li> 
+             </ul> </li>
+             
+             </ul> 
     </div> 
   </div> 
 </div> 
 <div ui-view="" class="container-fluid main-view-sidebar" data-container="true"> 
+<div ng-include = "'views/logged/bemvindo.view.html'">
 </div>
  
 <div class="modal fade" id="modalPassword"> 
@@ -53,7 +71,7 @@
     <div class="modal-content"> 
       <div class="modal-header"> 
         <button type="button" class="close" data-dismiss="modal" aria-label="{{'Home.view.Close' | translate}}"><span aria-hidden="true">×</span></button> 
-        <h4 class="modal-title" >{{"Home.view.ChangePassword" | translate}}</h4> 
+        <h4 class="modal-title">{{"Home.view.ChangePassword" | translate}}</h4> 
       </div> 
       <div class="modal-body"> 
         <form class="form-validation" autocomplete="off" name="form" role="form"> 
@@ -61,20 +79,20 @@
           </div> 
           <div class="list-group list-group-sm"> 
             <div class="list-group-item"> 
-              <input type="password" class="form-control no-border" id="oldPassword" placeholder="{{'Home.view.Old Password' | translate}}"> 
+              <input class="form-control no-border" id="oldPassword" placeholder="{Old Password}" ______placeholder="{{'Home.view.Old Password' | translate}}" type="password"> 
             </div> 
             <div class="list-group-item"> 
-              <input type="password" class="form-control no-border" id="newPassword" placeholder="{{'Home.view.New Password' | translate}}"> 
+              <input class="form-control no-border" id="newPassword" placeholder="{New Password}" ______placeholder="{{'Home.view.New Password' | translate}}" type="password"> 
             </div> 
             <div class="list-group-item"> 
-              <input type="password" class="form-control no-border" id="newPasswordConfirmation" placeholder="{{'Home.view.Confirmation' | translate}}"> 
+              <input class="form-control no-border" id="newPasswordConfirmation" placeholder="{Confirmation}" ______placeholder="{{'Home.view.Confirmation' | translate}}" type="password"> 
             </div> 
           </div> 
         </form> 
       </div> 
       <div class="modal-footer"> 
-        <button class="btn btn-primary" type="submit" ng-click="changePassword()" ng-disabled="form.$invalid || vm.dataLoading" >{{"Home.view.ChangePassword" | translate}}</button> 
-        <button type="button" class="btn btn-default" data-dismiss="modal" >{{'Home.view.Close' | translate}}</button> 
+        <button class="btn btn-primary" type="submit" ng-click="changePassword()" ng-disabled="form.$invalid || vm.dataLoading">{{"Home.view.ChangePassword" | translate}}</button> 
+        <button type="button" class="btn btn-default" data-dismiss="modal">{{'Home.view.Close' | translate}}</button> 
       </div> 
     </div> 
   </div> 

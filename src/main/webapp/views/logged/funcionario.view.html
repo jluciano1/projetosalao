@@ -1,0 +1,228 @@
+<h3>Funcionario</h3>
+
+<!-- div row para pesquisa -->
+<!--<div class="row">-->
+
+
+<div data-component="crn-button" id="crn-button-564202" class="">
+    <button class="btn btn-primary" type="submit" onclick="" ng-click="Funcionario.startInserting()" ng-hide="Funcionario.inserting || Funcionario.editing"><i class="fa fa-user"></i> <span class="">{{"template.crud.new" | translate}}</span></button>
+</div>
+<!-- fim div row para pesquisa -->
+<!--</div>-->
+
+<datasource filter="" name="Funcionario" entity="api/rest/Funcionario" keys="id" rows-per-page="100" delete-message="Deseja remover?" class=""></datasource>
+<div class="component-holder" data-component="crn-grid" id="crn-grid-Funcionario">
+    <div crn-datasource="Funcionario" class="" ng-hide="Funcionario.editing || Funcionario.inserting">
+        <table class="table  table-bordered table-hover table-striped">
+            <thead>
+            <tr class="table-header">
+                <th class="">
+                    <div class="">Nome</div>
+                </th>
+                <th class="">
+                    <div class="">Email</div>
+                </th>
+                <th class="">
+                    <div class="">Tipo</div>
+                </th>
+                <th class="">
+                    <div class="">Ramo Emprego</div>
+                </th>
+                <th class="">
+                    <div class="">Valor Salário</div>
+                </th>
+                <th class="">
+                    <div class="">Valor Comissão</div>
+                </th>
+                <th class="">
+                    <div class="">{{"template.crud.actions" | translate}}</div>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="table-content" ng-repeat="rowData in datasource.data">
+                <td class="">
+                    <div class="">
+                                {{rowData.nome  }}
+                    </div>
+                </td>
+                <td class="">
+                    <div class="">
+                                {{rowData.email  }}
+                    </div>
+                </td>
+                <td class="">
+                    <div class="">
+                                {{rowData.tipo  }}
+                    </div>
+                </td>
+                <td class="">
+                    <div class="">
+                                {{rowData.ramoEmprego  }}
+                    </div>
+                </td>
+                <td class="">
+                    <div class="">
+                                {{rowData.valorSalario  }}
+                    </div>
+                </td>
+                <td class="">
+                    <div class="">
+                                {{rowData.valorComissao  }}
+                    </div>
+                </td>
+                <td class="">
+                    <div class="">
+                        <button class="btn btn-default btn-sm" data-component="crn-button" type="submit" ng-click="datasource.startEditing(rowData)"><i class="fa fa-edit"></i></button>
+                        <button class="btn btn-default btn-sm" data-component="crn-button" type="submit" ng-click="datasource.remove(rowData)"><i class="fa fa-times"></i></button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="table-footer-controls">
+            <button class="btn btn-default btn-block btn-clicked" data-component="crn-button" ng-show="datasource.hasNextPage()" ng-click="datasource.nextPage()">{{"template.crud.load_more" | translate}}...</button>
+        </div>
+    </div>
+</div>
+<div data-component="crn-form" id="crn-form-form-Funcionario">
+    <div class="form" ng-show="Funcionario.editing || Funcionario.inserting">
+        <form crn-datasource="Funcionario" class="">
+            <div class="tool-bar" ng-hide="datasource.editing || datasource.inserting">
+                <button class="btn btn-primary" data-component="crn-button" ng-click="datasource.startInserting()"><i class="glyphicon glyphicon-plus-sign"></i></button>
+                <button class="btn btn-success" data-component="crn-button" ng-click="datasource.startEditing()"><i class="glyphicon glyphicon-edit"></i></button>
+                <button class="btn btn-primary" data-component="crn-button" ng-disabled="!datasource.hasPrevious()" ng-click="datasource.previous()"><i class="glyphicon glyphicon-chevron-left"></i></button>
+                <button class="btn btn-primary" data-component="crn-button" ng-disabled="!datasource.hasNext()" ng-click="datasource.next()"><i class="glyphicon glyphicon-chevron-right"></i></button>
+                <button class="btn btn-primary" data-component="crn-button" ng-click="datasource.remove()"><i class="glyphicon glyphicon-trash"></i></button>
+            </div>
+            <div class="active-bar" ng-hide="!datasource.editing &amp;&amp; !datasource.inserting">
+                <button class="btn btn-success" data-component="crn-button" ng-click="datasource.post()"><i class="glyphicon glyphicon-ok"></i></button>
+                <button class="btn btn-danger" data-component="crn-button" ng-click="datasource.cancel()"><i class="glyphicon glyphicon-remove"></i></button>
+            </div>
+            <br/>
+            <fieldset ng-disabled="!datasource.editing &amp;&amp; !datasource.inserting">
+
+                <div data-component="crn-textinput" id="crn-textinput-nome" class="">
+                    <div class="form-group">
+                        <label for="textinput-nome" class="">Nome</label>
+
+                                <input
+                                            type="text"
+                                            ng-model="Funcionario.active.nome"
+                                            class="form-control"
+                                            id="textinput-nome"
+                                            placeholder="Nome"
+                                            >
+                         <!-- end if !model.hasCronappFramework() -->
+                    </div>
+                </div>
+
+                <div data-component="crn-textinput" id="crn-textinput-email" class="">
+                    <div class="form-group">
+                        <label for="textinput-email" class="">Email</label>
+
+                                <input
+                                            type="text"
+                                            ng-model="Funcionario.active.email"
+                                            class="form-control"
+                                            id="textinput-email"
+                                            placeholder="Email"
+                                            >
+                         <!-- end if !model.hasCronappFramework() -->
+                    </div>
+                </div>
+
+                <div data-component="crn-textinput" id="crn-textinput-tipo" class="">
+                    <div class="form-group">
+                        <label for="textinput-tipo" class="">Tipo</label>
+
+                                <input
+                                            type="text"
+                                            ng-model="Funcionario.active.tipo"
+                                            class="form-control"
+                                            id="textinput-tipo"
+                                            placeholder="Tipo"
+                                            >
+                         <!-- end if !model.hasCronappFramework() -->
+                    </div>
+                </div>
+
+                <div data-component="crn-textinput" id="crn-textinput-ramoEmprego" class="">
+                    <div class="form-group">
+                        <label for="textinput-ramoEmprego" class="">Ramo Emprego</label>
+
+                                <input
+                                            type="text"
+                                            ng-model="Funcionario.active.ramoEmprego"
+                                            class="form-control"
+                                            id="textinput-ramoEmprego"
+                                            placeholder="Ramo Emprego"
+                                            >
+                         <!-- end if !model.hasCronappFramework() -->
+                    </div>
+                </div>
+
+                <div data-component="crn-textinput" id="crn-textinput-valorSalario" class="">
+                    <div class="form-group">
+                        <label for="textinput-valorSalario" class="">Valor Salário</label>
+
+                                <input
+                                            type="text"
+                                            ng-model="Funcionario.active.valorSalario"
+                                            class="form-control"
+                                            id="textinput-valorSalario"
+                                            placeholder="Valor Salário"
+                                            >
+                         <!-- end if !model.hasCronappFramework() -->
+                    </div>
+                </div>
+
+                <div data-component="crn-textinput" id="crn-textinput-valorComissao" class="">
+                    <div class="form-group">
+                        <label for="textinput-valorComissao" class="">Valor Comissão</label>
+
+                                <input
+                                            type="text"
+                                            ng-model="Funcionario.active.valorComissao"
+                                            class="form-control"
+                                            id="textinput-valorComissao"
+                                            placeholder="Valor Comissão"
+                                            >
+                         <!-- end if !model.hasCronappFramework() -->
+                    </div>
+                </div>
+                    <datasource name="User" entity="api/security/User" keys="id" class="" dependent-by="{{Funcionario}}"></datasource>
+
+                <div data-component="crn-combobox-dynamic" id="crn-combobox-dynamic-user" class="">
+                    <div class="form-group">
+                        <label for="combobox-dynamic-user" class="">User</label>
+
+                                <ui-select ng-model="Funcionario.active.user" crn-datasource="User" class="crn-select" id="combobox-dynamic-user"  theme="bootstrap">
+                                    <ui-select-match class="" placeholder="Select...">
+                                        {{$select.selected.email}}
+                                    </ui-select-match>
+                                    <ui-select-choices  repeat="rowData in datasource.data | filter : $select.search" class="" refresh="" refresh-deplay="">
+                                        <div class="" data-container="true">
+                                            {{rowData.email}}
+                                        </div>
+                                    </ui-select-choices>
+                                </ui-select>
+                         <!-- end if !model.hasCronappFramework() -->
+                    </div>
+                </div>
+                <!-- NtoN  -->
+                <!-- NtoN  end-->
+            </fieldset>
+        </form>
+        <form>
+            <fieldset>
+                <!-- OneToN -->
+                <!-- OneToOne  end -->
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+
+<!-- OneToOne modal -->
+<!-- OneToOne modal end-->

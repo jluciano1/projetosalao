@@ -10,23 +10,23 @@ import app.dao.*;
 import app.entity.*;
 
 /**
- * Classe que representa a camada de negócios de UserRoleBusiness
+ * Classe que representa a camada de negócios de AgendamentoBusiness
  * 
  * @generated
  **/
-@Service("UserRoleBusiness")
-public class UserRoleBusiness {
+@Service("AgendamentoBusiness")
+public class AgendamentoBusiness {
 
 
 
   /**
-   * Instância da classe UserRoleDAO que faz o acesso ao banco de dados
+   * Instância da classe AgendamentoDAO que faz o acesso ao banco de dados
    * 
    * @generated
    */
   @Autowired
-  @Qualifier("UserRoleDAO")
-  protected UserRoleDAO repository;
+  @Qualifier("AgendamentoDAO")
+  protected AgendamentoDAO repository;
 
   // CRUD
 
@@ -35,10 +35,10 @@ public class UserRoleBusiness {
    * 
    * @generated
    */
-  public UserRole post(final UserRole entity) throws Exception {
+  public Agendamento post(final Agendamento entity) throws Exception {
     // begin-user-code  
     // end-user-code  
-    UserRole result = repository.save(entity);
+    Agendamento result = repository.save(entity);
     // begin-user-code
     // end-user-code
     return result;
@@ -49,10 +49,10 @@ public class UserRoleBusiness {
    * 
    * @generated
    */
-  public UserRole put(final UserRole entity) throws Exception {
+  public Agendamento put(final Agendamento entity) throws Exception {
     // begin-user-code  
     // end-user-code
-    UserRole result = repository.saveAndFlush(entity);
+    Agendamento result = repository.saveAndFlush(entity);
     // begin-user-code
     // end-user-code
     return result;
@@ -64,7 +64,7 @@ public class UserRoleBusiness {
    * @generated
    */
   public void delete(java.lang.String id) throws Exception {
-    UserRole entity = this.get(id);
+    Agendamento entity = this.get(id);
     // begin-user-code  
     // end-user-code
     this.repository.delete(entity);
@@ -77,10 +77,10 @@ public class UserRoleBusiness {
    * 
    * @generated
    */
-  public UserRole get(java.lang.String id) throws Exception {
+  public Agendamento get(java.lang.String id) throws Exception {
     // begin-user-code  
     // end-user-code
-    UserRole result = repository.findOne(id);
+    Agendamento result = repository.findOne(id);
     // begin-user-code
     // end-user-code
     return result;
@@ -93,23 +93,10 @@ public class UserRoleBusiness {
    * 
    * @generated
    */
-  public Page<UserRole> list(Pageable pageable){
+  public Page<Agendamento> list(Pageable pageable){
     // begin-user-code
     // end-user-code
-    Page<UserRole> result = repository.list(pageable);
-    // begin-user-code
-    // end-user-code
-    return result;
-  }
-  /**
-   * Lista com paginação de acordo com a NamedQuery
-   * 
-   * @generated
-   */
-  public Page<UserRole> findByUser( User user, Pageable pageable){
-    // begin-user-code
-    // end-user-code
-    Page<UserRole> result = repository.findByUser( user, pageable);
+    Page<Agendamento> result = repository.list(pageable);
     // begin-user-code
     // end-user-code
     return result;
@@ -119,23 +106,10 @@ public class UserRoleBusiness {
    * 
    * @generated
    */
-  public Page<UserRole> findByEmail( java.lang.String email, Pageable pageable){
+  public Page<Agendamento> listByCliente( java.lang.String clienteId, Pageable pageable){
     // begin-user-code
     // end-user-code
-    Page<UserRole> result = repository.findByEmail( email, pageable);
-    // begin-user-code
-    // end-user-code
-    return result;
-  }
-  /**
-   * Lista com paginação de acordo com a NamedQuery
-   * 
-   * @generated
-   */
-  public Page<UserRole> findByLogin( java.lang.String login, Pageable pageable){
-    // begin-user-code
-    // end-user-code
-    Page<UserRole> result = repository.findByLogin( login, pageable);
+    Page<Agendamento> result = repository.listByCliente( clienteId, pageable);
     // begin-user-code
     // end-user-code
     return result;
@@ -145,35 +119,71 @@ public class UserRoleBusiness {
    * 
    * @generated
    */
-  public Page<UserRole> findByRole( java.lang.String roleid, Pageable pageable){
+  public Page<Agendamento> listByFuncionario( java.lang.String funcionarioId, Pageable pageable){
     // begin-user-code
     // end-user-code
-    Page<UserRole> result = repository.findByRole( roleid, pageable);
+    Page<Agendamento> result = repository.listByFuncionario( funcionarioId, pageable);
     // begin-user-code
     // end-user-code
     return result;
   }
   /**
-   * Foreign Key user
+   * Lista com paginação de acordo com a NamedQuery
+   * 
    * @generated
    */
-  public Page<UserRole> findUserRolesByUser(java.lang.String instanceId, Pageable pageable) {
+  public Page<Agendamento> listByData( java.util.Date data, Pageable pageable){
+    // begin-user-code
+    // end-user-code
+    Page<Agendamento> result = repository.listByData( data, pageable);
+    // begin-user-code
+    // end-user-code
+    return result;
+  }
+  
+  public Page<Agendamento> listByDataFutura(Pageable pageable){
+    // begin-user-code
+    // end-user-code
+    Page<Agendamento> result = repository.listByDataFutura(pageable);
+    // begin-user-code
+    // end-user-code
+    return result;
+  }
+  
+  /**
+   * Foreign Key servico
+   * @generated
+   */
+  public Page<Agendamento> findAgendamentosByServico(java.lang.String instanceId, Pageable pageable) {
     // begin-user-code
     // end-user-code  
-    Page<UserRole> result = repository.findUserRolesByUser(instanceId, pageable);
+    Page<Agendamento> result = repository.findAgendamentosByServico(instanceId, pageable);
     // begin-user-code  
     // end-user-code        
     return result;
   }
   
   /**
-   * Foreign Key role
+   * Foreign Key cliente
    * @generated
    */
-  public Page<UserRole> findUserRolesByRole(java.lang.String instanceId, Pageable pageable) {
+  public Page<Agendamento> findAgendamentosByCliente(java.lang.String instanceId, Pageable pageable) {
     // begin-user-code
     // end-user-code  
-    Page<UserRole> result = repository.findUserRolesByRole(instanceId, pageable);
+    Page<Agendamento> result = repository.findAgendamentosByCliente(instanceId, pageable);
+    // begin-user-code  
+    // end-user-code        
+    return result;
+  }
+  
+  /**
+   * Foreign Key funcionario
+   * @generated
+   */
+  public Page<Agendamento> findAgendamentosByFuncionario(java.lang.String instanceId, Pageable pageable) {
+    // begin-user-code
+    // end-user-code  
+    Page<Agendamento> result = repository.findAgendamentosByFuncionario(instanceId, pageable);
     // begin-user-code  
     // end-user-code        
     return result;

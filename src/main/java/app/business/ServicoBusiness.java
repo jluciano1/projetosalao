@@ -10,23 +10,23 @@ import app.dao.*;
 import app.entity.*;
 
 /**
- * Classe que representa a camada de negócios de RoleBusiness
+ * Classe que representa a camada de negócios de ServicoBusiness
  * 
  * @generated
  **/
-@Service("RoleBusiness")
-public class RoleBusiness {
+@Service("ServicoBusiness")
+public class ServicoBusiness {
 
 
 
   /**
-   * Instância da classe RoleDAO que faz o acesso ao banco de dados
+   * Instância da classe ServicoDAO que faz o acesso ao banco de dados
    * 
    * @generated
    */
   @Autowired
-  @Qualifier("RoleDAO")
-  protected RoleDAO repository;
+  @Qualifier("ServicoDAO")
+  protected ServicoDAO repository;
 
   // CRUD
 
@@ -35,10 +35,10 @@ public class RoleBusiness {
    * 
    * @generated
    */
-  public Role post(final Role entity) throws Exception {
+  public Servico post(final Servico entity) throws Exception {
     // begin-user-code  
     // end-user-code  
-    Role result = repository.save(entity);
+    Servico result = repository.save(entity);
     // begin-user-code
     // end-user-code
     return result;
@@ -49,10 +49,10 @@ public class RoleBusiness {
    * 
    * @generated
    */
-  public Role put(final Role entity) throws Exception {
+  public Servico put(final Servico entity) throws Exception {
     // begin-user-code  
     // end-user-code
-    Role result = repository.saveAndFlush(entity);
+    Servico result = repository.saveAndFlush(entity);
     // begin-user-code
     // end-user-code
     return result;
@@ -64,7 +64,7 @@ public class RoleBusiness {
    * @generated
    */
   public void delete(java.lang.String id) throws Exception {
-    Role entity = this.get(id);
+    Servico entity = this.get(id);
     // begin-user-code  
     // end-user-code
     this.repository.delete(entity);
@@ -77,10 +77,10 @@ public class RoleBusiness {
    * 
    * @generated
    */
-  public Role get(java.lang.String id) throws Exception {
+  public Servico get(java.lang.String id) throws Exception {
     // begin-user-code  
     // end-user-code
-    Role result = repository.findOne(id);
+    Servico result = repository.findOne(id);
     // begin-user-code
     // end-user-code
     return result;
@@ -93,10 +93,10 @@ public class RoleBusiness {
    * 
    * @generated
    */
-  public Page<Role> list(Pageable pageable){
+  public Page<Servico> list(Pageable pageable){
     // begin-user-code
     // end-user-code
-    Page<Role> result = repository.list(pageable);
+    Page<Servico> result = repository.list(pageable);
     // begin-user-code
     // end-user-code
     return result;
@@ -106,37 +106,12 @@ public class RoleBusiness {
    * @generated modifiable
    * OneToMany Relation
    */  
-  public Page<UserRole> findUserRole(java.lang.String id, Pageable pageable) {
+  public Page<Agendamento> findAgendamento(java.lang.String id, Pageable pageable) {
     // begin-user-code
     // end-user-code  
-    Page<UserRole> result = repository.findUserRole(id, pageable);
+    Page<Agendamento> result = repository.findAgendamento(id, pageable);
     // begin-user-code  
     // end-user-code        
     return result;    
-  }
-  /**
-   * @generated modifiable
-   * ManyToMany Relation
-   */  
-  public Page<User> listUser(java.lang.String id, Pageable pageable) {
-    // begin-user-code
-    // end-user-code  
-    Page<User> result = repository.listUser(id, pageable);
-    // begin-user-code
-    // end-user-code
-    return result;            
-  }
-  
-  /**
-   * @generated modifiable
-   * ManyToMany Relation
-   */    
-  public int deleteUser(java.lang.String instanceId, java.lang.String relationId) {
-    // begin-user-code
-    // end-user-code  
-    int result = repository.deleteUser(instanceId, relationId);
-    // begin-user-code
-    // end-user-code  
-    return result;  
   }
 }

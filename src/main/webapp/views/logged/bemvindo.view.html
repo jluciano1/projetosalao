@@ -1,0 +1,68 @@
+<datasource filter="/listByDataFutura" name="Agendamento" entity="api/rest/Agendamento" keys="id" rows-per-page="100" delete-message="Deseja remover?" class=""></datasource>
+Próximos horários agendados:
+<br>
+<div class="component-holder" data-component="crn-grid" id="crn-grid-Agendamento">
+    <div crn-datasource="Agendamento" class="" ng-hide="Agendamento.editing || Agendamento.inserting">
+        <table class="table  table-bordered table-hover table-striped">
+            <thead>
+            <tr class="table-header">
+                <th class="">
+                    <div class="">Data</div>
+                </th>
+                <th class="">
+                    <div class="">Hora</div>
+                </th>
+                <th class="">
+                    <div class="">Valor Total</div>
+                </th>
+                <th class="">
+                    <div class="">Servico</div>
+                </th>
+                <th class="">
+                    <div class="">Cliente</div>
+                </th>
+                <th class="">
+                    <div class="">Funcionario</div>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="table-content" ng-repeat="rowData in datasource.data">
+                <td class="">
+                    <div class="">
+                                {{rowData.data | date:'dd/MM/yyyy'}}
+                    </div>
+                </td>
+                <td class="">
+                    <div class="">
+                                {{rowData.hora  }}
+                    </div>
+                </td>
+                <td class="">
+                    <div class="">
+                                {{rowData.valorTotal  }}
+                    </div>
+                </td>
+                <td class="">
+                    <div class="">
+                            {{rowData.servico.nome}}
+                    </div>
+                </td>
+                <td class="">
+                    <div class="">
+                            {{rowData.cliente.nome}}
+                    </div>
+                </td>
+                <td class="">
+                    <div class="">
+                            {{rowData.funcionario.nome}}
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="table-footer-controls">
+            <button class="btn btn-default btn-block btn-clicked" data-component="crn-button" ng-show="datasource.hasNextPage()" ng-click="datasource.nextPage()">{{"template.crud.load_more" | translate}}...</button>
+        </div>
+        </div>
+</div>

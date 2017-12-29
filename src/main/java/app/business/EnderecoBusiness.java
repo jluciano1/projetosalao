@@ -10,23 +10,23 @@ import app.dao.*;
 import app.entity.*;
 
 /**
- * Classe que representa a camada de negócios de RoleBusiness
+ * Classe que representa a camada de negócios de EnderecoBusiness
  * 
  * @generated
  **/
-@Service("RoleBusiness")
-public class RoleBusiness {
+@Service("EnderecoBusiness")
+public class EnderecoBusiness {
 
 
 
   /**
-   * Instância da classe RoleDAO que faz o acesso ao banco de dados
+   * Instância da classe EnderecoDAO que faz o acesso ao banco de dados
    * 
    * @generated
    */
   @Autowired
-  @Qualifier("RoleDAO")
-  protected RoleDAO repository;
+  @Qualifier("EnderecoDAO")
+  protected EnderecoDAO repository;
 
   // CRUD
 
@@ -35,10 +35,10 @@ public class RoleBusiness {
    * 
    * @generated
    */
-  public Role post(final Role entity) throws Exception {
+  public Endereco post(final Endereco entity) throws Exception {
     // begin-user-code  
     // end-user-code  
-    Role result = repository.save(entity);
+    Endereco result = repository.save(entity);
     // begin-user-code
     // end-user-code
     return result;
@@ -49,10 +49,10 @@ public class RoleBusiness {
    * 
    * @generated
    */
-  public Role put(final Role entity) throws Exception {
+  public Endereco put(final Endereco entity) throws Exception {
     // begin-user-code  
     // end-user-code
-    Role result = repository.saveAndFlush(entity);
+    Endereco result = repository.saveAndFlush(entity);
     // begin-user-code
     // end-user-code
     return result;
@@ -64,7 +64,7 @@ public class RoleBusiness {
    * @generated
    */
   public void delete(java.lang.String id) throws Exception {
-    Role entity = this.get(id);
+    Endereco entity = this.get(id);
     // begin-user-code  
     // end-user-code
     this.repository.delete(entity);
@@ -77,10 +77,10 @@ public class RoleBusiness {
    * 
    * @generated
    */
-  public Role get(java.lang.String id) throws Exception {
+  public Endereco get(java.lang.String id) throws Exception {
     // begin-user-code  
     // end-user-code
-    Role result = repository.findOne(id);
+    Endereco result = repository.findOne(id);
     // begin-user-code
     // end-user-code
     return result;
@@ -93,50 +93,38 @@ public class RoleBusiness {
    * 
    * @generated
    */
-  public Page<Role> list(Pageable pageable){
+  public Page<Endereco> list(Pageable pageable){
     // begin-user-code
     // end-user-code
-    Page<Role> result = repository.list(pageable);
+    Page<Endereco> result = repository.list(pageable);
     // begin-user-code
     // end-user-code
     return result;
   }
-  
   /**
-   * @generated modifiable
-   * OneToMany Relation
-   */  
-  public Page<UserRole> findUserRole(java.lang.String id, Pageable pageable) {
+   * Foreign Key funcionario
+   * @generated
+   */
+  public Page<Endereco> findEnderecosByFuncionario(java.lang.String instanceId, Pageable pageable) {
     // begin-user-code
     // end-user-code  
-    Page<UserRole> result = repository.findUserRole(id, pageable);
+    Page<Endereco> result = repository.findEnderecosByFuncionario(instanceId, pageable);
     // begin-user-code  
     // end-user-code        
-    return result;    
-  }
-  /**
-   * @generated modifiable
-   * ManyToMany Relation
-   */  
-  public Page<User> listUser(java.lang.String id, Pageable pageable) {
-    // begin-user-code
-    // end-user-code  
-    Page<User> result = repository.listUser(id, pageable);
-    // begin-user-code
-    // end-user-code
-    return result;            
+    return result;
   }
   
   /**
-   * @generated modifiable
-   * ManyToMany Relation
-   */    
-  public int deleteUser(java.lang.String instanceId, java.lang.String relationId) {
+   * Foreign Key cliente
+   * @generated
+   */
+  public Page<Endereco> findEnderecosByCliente(java.lang.String instanceId, Pageable pageable) {
     // begin-user-code
     // end-user-code  
-    int result = repository.deleteUser(instanceId, relationId);
-    // begin-user-code
-    // end-user-code  
-    return result;  
+    Page<Endereco> result = repository.findEnderecosByCliente(instanceId, pageable);
+    // begin-user-code  
+    // end-user-code        
+    return result;
   }
+  
 }

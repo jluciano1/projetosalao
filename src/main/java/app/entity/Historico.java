@@ -6,13 +6,13 @@ import java.util.*;
 import javax.xml.bind.annotation.*;
 
 /**
- * Classe que representa a tabela USERROLE
+ * Classe que representa a tabela HISTORICO
  * @generated
  */
 @Entity
-@Table(name = "\"USERROLE\"")
+@Table(name = "\"HISTORICO\"")
 @XmlRootElement
-public class UserRole implements Serializable {
+public class Historico implements Serializable {
 
   /**
    * UID da classe, necessário na serialização 
@@ -30,22 +30,21 @@ public class UserRole implements Serializable {
   /**
   * @generated
   */
-  @ManyToOne
-  @JoinColumn(name="fk_user", nullable = true, referencedColumnName = "id", insertable=true, updatable=true)
-  private User user;
+  @Column(name = "descricao", nullable = true, unique = false, insertable=true, updatable=true)
+  private java.lang.String descricao;
   
   /**
   * @generated
   */
-  @ManyToOne
-  @JoinColumn(name="fk_role", nullable = true, referencedColumnName = "id", insertable=true, updatable=true)
-  private Role role;
+  @OneToOne
+  @JoinColumn(name="fk_agendamento", nullable = true, referencedColumnName = "id", insertable=true, updatable=true)
+  private Agendamento agendamento;
   
   /**
    * Construtor
    * @generated
    */
-  public UserRole(){
+  public Historico(){
   }
 
   
@@ -63,46 +62,46 @@ public class UserRole implements Serializable {
    * @param id id
    * @generated
    */
-  public UserRole setId(java.lang.String id){
+  public Historico setId(java.lang.String id){
     this.id = id;
     return this;
   }
   
   /**
-   * Obtém user
-   * return user
+   * Obtém descricao
+   * return descricao
    * @generated
    */
-  public User getUser(){
-    return this.user;
+  public java.lang.String getDescricao(){
+    return this.descricao;
   }
   
   /**
-   * Define user
-   * @param user user
+   * Define descricao
+   * @param descricao descricao
    * @generated
    */
-  public UserRole setUser(User user){
-    this.user = user;
+  public Historico setDescricao(java.lang.String descricao){
+    this.descricao = descricao;
     return this;
   }
   
   /**
-   * Obtém role
-   * return role
+   * Obtém agendamento
+   * return agendamento
    * @generated
    */
-  public Role getRole(){
-    return this.role;
+  public Agendamento getAgendamento(){
+    return this.agendamento;
   }
   
   /**
-   * Define role
-   * @param role role
+   * Define agendamento
+   * @param agendamento agendamento
    * @generated
    */
-  public UserRole setRole(Role role){
-    this.role = role;
+  public Historico setAgendamento(Agendamento agendamento){
+    this.agendamento = agendamento;
     return this;
   }
   
@@ -113,7 +112,7 @@ public class UserRole implements Serializable {
   public boolean equals(Object obj) {
     if (this == obj) return true;
     if (obj == null || getClass() != obj.getClass()) return false;
-    UserRole object = (UserRole)obj;
+    Historico object = (Historico)obj;
     if (id != null ? !id.equals(object.id) : object.id != null) return false;
     return true;
   }

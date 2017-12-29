@@ -293,6 +293,42 @@ public class ClienteREST {
   }  
 
   /**
+   * ManyToMany Relationship GET
+   * @generated
+   */
+  @RequestMapping(method = RequestMethod.GET,value="/{clienteId}/Funcionario_3")
+  public HttpEntity<PagedResources<Funcionario>> listFuncionario_3(@PathVariable("clienteId") java.lang.String clienteId, Pageable pageable, PagedResourcesAssembler assembler) {
+    return new ResponseEntity<>(assembler.toResource(clienteBusiness.listFuncionario_3(clienteId, pageable)), HttpStatus.OK); 
+  }
+
+  /**
+   * ManyToMany Relationship POST
+   * @generated
+   */  
+  @RequestMapping(method = RequestMethod.POST,value="/{clienteId}/Funcionario_3")
+  public Cliente postFuncionario_3(@Validated @RequestBody final Funcionario entity, @PathVariable("clienteId") java.lang.String clienteId) throws Exception {
+    Agendamento newAgendamento = new Agendamento();
+
+    Cliente cliente = this.clienteBusiness.get(clienteId);
+
+    newAgendamento.setFuncionario(entity);
+    newAgendamento.setCliente(cliente);
+    
+    this.agendamentoBusiness.post(newAgendamento);
+
+    return newAgendamento.getCliente();
+  }   
+
+  /**
+   * ManyToMany Relationship DELETE
+   * @generated
+   */  
+  @RequestMapping(method = RequestMethod.DELETE,value="/{clienteId}/Funcionario_3/{Funcionario_3Id}")
+  public void deleteFuncionario_3(@PathVariable("clienteId") java.lang.String clienteId, @PathVariable("Funcionario_3Id") java.lang.String Funcionario_3Id) {
+    this.clienteBusiness.deleteFuncionario_3(clienteId, Funcionario_3Id);
+  }  
+
+  /**
    * Serviço exposto para recuperar a entidade de acordo com o id fornecido
    * 
    * @generated

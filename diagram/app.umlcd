@@ -1964,12 +1964,12 @@
         "+ list(): List<Servico>"
       ],
       "position": {
-        "x": 600,
-        "y": 729
+        "x": 425,
+        "y": 713
       },
       "size": {
         "width": 197,
-        "height": 143.3904800415039
+        "height": 143.39051055908203
       },
       "angle": 0,
       "multitenantContextJsonIgnore": "false",
@@ -2134,7 +2134,6 @@
         "data:java.util.Date",
         "hora:java.lang.Integer",
         "valorTotal:java.lang.Double",
-        "servico:Servico",
         "cliente:Cliente",
         "funcionario:Funcionario"
       ],
@@ -2145,12 +2144,12 @@
         "+ listByData(data:java.util.Date): List<Agendamento>"
       ],
       "position": {
-        "x": 996,
+        "x": 997,
         "y": 677
       },
       "size": {
         "width": 348,
-        "height": 208.9575653076172
+        "height": 198.0064697265625
       },
       "angle": 0,
       "multitenantContextJsonIgnore": "false",
@@ -2290,29 +2289,6 @@
           "isSearchable": false
         },
         {
-          "name": "servico",
-          "type": "Servico",
-          "dbName": "fk_servico",
-          "dbLength": "",
-          "dbPrecision": "",
-          "dbScale": "",
-          "dbDefaultValue": "",
-          "label": "",
-          "mask": "",
-          "isPrimaryKey": false,
-          "isUniqueKey": false,
-          "isNullable": true,
-          "pkType": "",
-          "multitenantContext": "",
-          "jsonIgnore": false,
-          "isTransient": false,
-          "isInsertable": true,
-          "isUpdatable": true,
-          "isEncryption": false,
-          "referencedColumnName": "",
-          "isSearchable": false
-        },
-        {
           "name": "cliente",
           "type": "Cliente",
           "dbName": "fk_cliente",
@@ -2371,12 +2347,12 @@
           "transform": "translate(0,0)"
         },
         ".uml-class-attrs-rect": {
-          "height": 170,
+          "height": 150,
           "transform": "translate(0,50)"
         },
         ".uml-class-methods-rect": {
           "height": 110,
-          "transform": "translate(0,220)"
+          "transform": "translate(0,200)"
         },
         ".uml-class-name-text": {
           "fill": "#000",
@@ -2386,12 +2362,12 @@
         },
         ".uml-class-attrs-text": {
           "font-size": 11,
-          "text": "id\ndata\nhora\nvalorTotal\nservico\ncliente\nfuncionario\n"
+          "text": "id\ndata\nhora\nvalorTotal\ncliente\nfuncionario\n"
         },
         ".uml-class-attrs-value": {
           "ref-x": 249,
           "font-size": 11,
-          "text": "java.lang.String\njava.util.Date\njava.lang.Integer\njava.lang.Double\nServico\nCliente\nFuncionario\n"
+          "text": "java.lang.String\njava.util.Date\njava.lang.Integer\njava.lang.Double\nCliente\nFuncionario\n"
         },
         ".uml-class-methods-text": {
           "fill": "#0066FF",
@@ -2550,48 +2526,6 @@
     {
       "type": "uml.Composition",
       "relationFields": [
-        "servico:target"
-      ],
-      "name": null,
-      "id": "1577e074-c18f-4271-a053-3c8f4e7c7eb1",
-      "runtimeClass": "cronos.widgets.joint.arrow.OneToMany",
-      "target": {
-        "id": "51c0678d-10b3-4fe6-b5ab-2937aafc45c9"
-      },
-      "source": {
-        "id": "815d4d87-e203-4ced-87b6-2484eda66a01"
-      },
-      "labels": [
-        {
-          "position": 0.9,
-          "attrs": {
-            "rect": {
-              "fill": "transparent"
-            },
-            "text": {
-              "text": "*",
-              "font-family": "Arial",
-              "font-size": "12px",
-              "fill": "#cecece"
-            }
-          }
-        }
-      ],
-      "z": 25,
-      "attrs": {
-        ".marker-target": {
-          "d": "",
-          "fill": ""
-        },
-        ".marker-source": {
-          "d": "M 40 10 L 20 20 L 0 10 L 20 0 z",
-          "fill": "#cecece"
-        }
-      }
-    },
-    {
-      "type": "uml.Composition",
-      "relationFields": [
         "cliente:target"
       ],
       "name": null,
@@ -2714,6 +2648,233 @@
           "fill": "#cecece"
         }
       }
+    },
+    {
+      "type": "uml.Class",
+      "name": "AgendamentoServico",
+      "attributes": [
+        "id:java.lang.String",
+        "agendamento:Agendamento",
+        "servico:Servico"
+      ],
+      "methods": [
+        "+ list(): List<AgendamentoServico>"
+      ],
+      "position": {
+        "x": 687,
+        "y": 704
+      },
+      "size": {
+        "width": 223,
+        "height": 132.51580047607422
+      },
+      "angle": 0,
+      "multitenantContextJsonIgnore": "false",
+      "multitenantContextIgnoreEntities": "",
+      "role": "AssociationClass",
+      "queries": [
+        {
+          "isRest": "true",
+          "name": "list",
+          "query": "select as from $entity as",
+          "void": false,
+          "type": "select"
+        }
+      ],
+      "tableName": null,
+      "tableScheme": null,
+      "isRest": "true",
+      "multitenantContext": "",
+      "restSecurity": null,
+      "restPath": "",
+      "id": "ebfaf53a-789b-478c-80fc-e057cbc8a14a",
+      "fields": [
+        {
+          "name": "id",
+          "type": "java.lang.String",
+          "dbName": "id",
+          "label": "",
+          "mask": "",
+          "isPrimaryKey": true,
+          "isUniqueKey": false,
+          "isNullable": false,
+          "multitenantContext": "",
+          "pkType": "UUID",
+          "isIgnore": false,
+          "isTransien": false,
+          "isInsertable": true,
+          "isUpdatable": true,
+          "isEncryption": false,
+          "referencedColumnName": "",
+          "isSearchable": false
+        },
+        {
+          "name": "agendamento",
+          "type": "Agendamento",
+          "dbName": "fk_agendamento",
+          "label": "",
+          "mask": "",
+          "isPrimaryKey": false,
+          "isUniqueKey": false,
+          "isNullable": true,
+          "multitenantContext": "",
+          "pkType": "",
+          "isIgnore": false,
+          "isTransien": false,
+          "isInsertable": true,
+          "isUpdatable": true,
+          "isEncryption": false,
+          "referencedColumnName": "",
+          "isSearchable": false
+        },
+        {
+          "name": "servico",
+          "type": "Servico",
+          "dbName": "fk_servico",
+          "label": "",
+          "mask": "",
+          "isPrimaryKey": false,
+          "isUniqueKey": false,
+          "isNullable": true,
+          "multitenantContext": "",
+          "pkType": "",
+          "isIgnore": false,
+          "isTransien": false,
+          "isInsertable": true,
+          "isUpdatable": true,
+          "isEncryption": false,
+          "referencedColumnName": "",
+          "isSearchable": false
+        }
+      ],
+      "runtimeClass": "cronos.widgets.joint.uml.Class",
+      "z": 29,
+      "attrs": {
+        "rect": {
+          "stroke": "yellow",
+          "stroke-width": 2
+        },
+        ".uml-class-name-rect": {
+          "fill": "#fffec0",
+          "height": 50,
+          "transform": "translate(0,0)"
+        },
+        ".uml-class-attrs-rect": {
+          "fill": "#fffec0",
+          "height": 90,
+          "transform": "translate(0,50)"
+        },
+        ".uml-class-methods-rect": {
+          "fill": "#fffec0",
+          "height": 50,
+          "transform": "translate(0,140)"
+        },
+        ".uml-class-name-text": {
+          "fill": "#000",
+          "font-size": 12,
+          "text": "AgendamentoServico",
+          "font-weight": "bold"
+        },
+        ".uml-class-attrs-text": {
+          "fill": "#000",
+          "font-size": 11,
+          "text": "id\nagendamento\nservico\n"
+        },
+        ".uml-class-attrs-value": {
+          "ref-x": 129,
+          "font-size": 11,
+          "text": "java.lang.String\nAgendamento\nServico\n"
+        },
+        ".uml-class-methods-text": {
+          "fill": "#0066FF",
+          "font-size": 11,
+          "text": "+ list(): List<AgendamentoServico>"
+        }
+      }
+    },
+    {
+      "type": "uml.Composition",
+      "relationFields": [
+        "agendamento:target"
+      ],
+      "name": null,
+      "id": "fc8d010e-0209-45a7-8e70-d8b273579266",
+      "runtimeClass": "cronos.widgets.joint.arrow.OneToMany",
+      "target": {
+        "id": "ebfaf53a-789b-478c-80fc-e057cbc8a14a"
+      },
+      "source": {
+        "id": "51c0678d-10b3-4fe6-b5ab-2937aafc45c9"
+      },
+      "labels": [
+        {
+          "position": 0.9,
+          "attrs": {
+            "rect": {
+              "fill": "transparent"
+            },
+            "text": {
+              "text": "*",
+              "font-family": "Arial",
+              "font-size": "12px",
+              "fill": "#cecece"
+            }
+          }
+        }
+      ],
+      "z": 30,
+      "attrs": {
+        ".marker-target": {
+          "d": "",
+          "fill": ""
+        },
+        ".marker-source": {
+          "d": "M 40 10 L 20 20 L 0 10 L 20 0 z",
+          "fill": "#cecece"
+        }
+      }
+    },
+    {
+      "type": "uml.Composition",
+      "relationFields": [
+        "servico:target"
+      ],
+      "name": null,
+      "id": "f3cd00de-1aa4-4938-bd4a-60c02a0547d9",
+      "runtimeClass": "cronos.widgets.joint.arrow.OneToMany",
+      "target": {
+        "id": "ebfaf53a-789b-478c-80fc-e057cbc8a14a"
+      },
+      "source": {
+        "id": "815d4d87-e203-4ced-87b6-2484eda66a01"
+      },
+      "labels": [
+        {
+          "position": 0.9,
+          "attrs": {
+            "rect": {
+              "fill": "transparent"
+            },
+            "text": {
+              "text": "*",
+              "font-family": "Arial",
+              "font-size": "12px",
+              "fill": "#cecece"
+            }
+          }
+        }
+      ],
+      "z": 31,
+      "attrs": {
+        ".marker-target": {
+          "d": "",
+          "fill": ""
+        },
+        ".marker-source": {
+          "d": "M 40 10 L 20 20 L 0 10 L 20 0 z",
+          "fill": "#cecece"
+        }
+      }
     }
   ],
   "selectedGroup": "1d7f906f-a526-482d-aaf4-08d227ae8c18",
@@ -2740,7 +2901,8 @@
         "1df87f56-c5ba-47f5-8e68-82931f49b989",
         "98b62896-b479-4be9-9842-de8fdb2b79a3",
         "57c18851-d24c-449d-8ab0-f9a80360a5e9",
-        "51c0678d-10b3-4fe6-b5ab-2937aafc45c9"
+        "51c0678d-10b3-4fe6-b5ab-2937aafc45c9",
+        "ebfaf53a-789b-478c-80fc-e057cbc8a14a"
       ]
     }
   ]

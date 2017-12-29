@@ -12,6 +12,7 @@
         <class>app.entity.User</class>
         <class>app.entity.Role</class>
         <class>app.entity.Historico</class>
+        <class>app.entity.AgendamentoServico</class>
         <class>app.entity.Endereco</class>
         <properties>
             <property name="eclipselink.ddl-generation" value="create-or-extend-tables"/>

@@ -101,5 +101,19 @@ public interface FuncionarioDAO extends JpaRepository<Funcionario, java.lang.Str
   @Modifying
   @Query("DELETE FROM Endereco entity WHERE entity.funcionario.id = :instanceId AND entity.cliente.id = :relationId")
   public int deleteCliente_2(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
+  /**
+   * ManyToOne Relation
+   * @generated
+   */
+  @Query("SELECT entity.cliente FROM Agendamento entity WHERE entity.funcionario.id = :id")
+  public Page<Cliente> listCliente_3(@Param(value="id") java.lang.String id, Pageable pageable);
+
+  /**
+   * ManyToOne Relation Delete
+   * @generated
+   */
+  @Modifying
+  @Query("DELETE FROM Agendamento entity WHERE entity.funcionario.id = :instanceId AND entity.cliente.id = :relationId")
+  public int deleteCliente_3(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
 
 }

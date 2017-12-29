@@ -57,7 +57,21 @@ public interface ServicoDAO extends JpaRepository<Servico, java.lang.String> {
    * OneToMany Relation
    * @generated
    */
-  @Query("SELECT entity FROM Agendamento entity WHERE entity.servico.id = :id")
-  public Page<Agendamento> findAgendamento(@Param(value="id") java.lang.String id, Pageable pageable);
+  @Query("SELECT entity FROM AgendamentoServico entity WHERE entity.servico.id = :id")
+  public Page<AgendamentoServico> findAgendamentoServico(@Param(value="id") java.lang.String id, Pageable pageable);
+  /**
+   * ManyToOne Relation
+   * @generated
+   */
+  @Query("SELECT entity.agendamento FROM AgendamentoServico entity WHERE entity.servico.id = :id")
+  public Page<Agendamento> listAgendamento(@Param(value="id") java.lang.String id, Pageable pageable);
+
+  /**
+   * ManyToOne Relation Delete
+   * @generated
+   */
+  @Modifying
+  @Query("DELETE FROM AgendamentoServico entity WHERE entity.servico.id = :instanceId AND entity.agendamento.id = :relationId")
+  public int deleteAgendamento(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
 
 }

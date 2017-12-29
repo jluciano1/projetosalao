@@ -101,5 +101,19 @@ public interface ClienteDAO extends JpaRepository<Cliente, java.lang.String> {
   @Modifying
   @Query("DELETE FROM Endereco entity WHERE entity.cliente.id = :instanceId AND entity.funcionario.id = :relationId")
   public int deleteFuncionario_2(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
+  /**
+   * ManyToOne Relation
+   * @generated
+   */
+  @Query("SELECT entity.funcionario FROM Agendamento entity WHERE entity.cliente.id = :id")
+  public Page<Funcionario> listFuncionario_3(@Param(value="id") java.lang.String id, Pageable pageable);
+
+  /**
+   * ManyToOne Relation Delete
+   * @generated
+   */
+  @Modifying
+  @Query("DELETE FROM Agendamento entity WHERE entity.cliente.id = :instanceId AND entity.funcionario.id = :relationId")
+  public int deleteFuncionario_3(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
 
 }

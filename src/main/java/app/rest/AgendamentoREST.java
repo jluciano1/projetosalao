@@ -30,6 +30,20 @@ public class AgendamentoREST {
   private AgendamentoBusiness agendamentoBusiness;
 
   /**
+   * @generated
+   */
+  @Autowired
+  @Qualifier("ServicoBusiness")
+  private ServicoBusiness servicoBusiness;
+
+  /**
+   * @generated
+   */
+  @Autowired
+  @Qualifier("AgendamentoServicoBusiness")
+  private AgendamentoServicoBusiness agendamentoServicoBusiness;
+
+  /**
    * Serviço exposto para novo registro de acordo com a entidade fornecida
    * 
    * @generated
@@ -104,11 +118,80 @@ public class AgendamentoREST {
   public HttpEntity<PagedResources<Agendamento>> listByDataParams(@PathVariable("data") java.util.Date data, Pageable pageable, PagedResourcesAssembler assembler){
     return new ResponseEntity<>(assembler.toResource(agendamentoBusiness.listByData(data, pageable)), HttpStatus.OK);    
   }
-  
-  @RequestMapping(method = RequestMethod.GET, value="/listByDataFutura")
-  public HttpEntity<PagedResources<Agendamento>> listByDataFutura(Pageable pageable, PagedResourcesAssembler assembler){
-    return new ResponseEntity<>(assembler.toResource(agendamentoBusiness.listByDataFutura(pageable)), HttpStatus.OK);    
+
+  /**
+   * OneToMany Relationship GET
+   * @generated
+   */
+  @RequestMapping(method = RequestMethod.GET, value="/{agendamentoId}/AgendamentoServico")    
+  public HttpEntity<PagedResources<AgendamentoServico>> findAgendamentoServico(@PathVariable("agendamentoId") java.lang.String agendamentoId, Pageable pageable, PagedResourcesAssembler assembler) {
+    return new ResponseEntity<>(assembler.toResource(agendamentoBusiness.findAgendamentoServico(agendamentoId, pageable)), HttpStatus.OK);
   }
+
+  /**
+   * OneToMany Relationship DELETE 
+   * @generated
+   */  
+  @RequestMapping(method = RequestMethod.DELETE, value="/{agendamentoId}/AgendamentoServico/{agendamentoServicoId}")    
+  public void deleteAgendamentoServico(@PathVariable("agendamentoServicoId") java.lang.String agendamentoServicoId) throws Exception {
+    this.agendamentoServicoBusiness.delete(agendamentoServicoId);
+  }
+  
+  /**
+   * OneToMany Relationship PUT
+   * @generated
+   */  
+  @RequestMapping(method = RequestMethod.PUT, value="/{agendamentoId}/AgendamentoServico")
+  public AgendamentoServico putAgendamentoServico(@Validated @RequestBody final AgendamentoServico entity, @PathVariable("agendamentoId") java.lang.String agendamentoId) throws Exception {
+    return this.agendamentoServicoBusiness.put(entity);
+  }  
+  
+  /**
+   * OneToMany Relationship POST
+   * @generated
+   */  
+  @RequestMapping(method = RequestMethod.POST, value="/{agendamentoId}/AgendamentoServico")
+  public AgendamentoServico postAgendamentoServico(@Validated @RequestBody final AgendamentoServico entity, @PathVariable("agendamentoId") java.lang.String agendamentoId) throws Exception {
+    Agendamento agendamento = this.agendamentoBusiness.get(agendamentoId);
+    entity.setAgendamento(agendamento);
+    return this.agendamentoServicoBusiness.post(entity);
+  }
+
+  /**
+   * ManyToMany Relationship GET
+   * @generated
+   */
+  @RequestMapping(method = RequestMethod.GET,value="/{agendamentoId}/Servico")
+  public HttpEntity<PagedResources<Servico>> listServico(@PathVariable("agendamentoId") java.lang.String agendamentoId, Pageable pageable, PagedResourcesAssembler assembler) {
+    return new ResponseEntity<>(assembler.toResource(agendamentoBusiness.listServico(agendamentoId, pageable)), HttpStatus.OK); 
+  }
+
+  /**
+   * ManyToMany Relationship POST
+   * @generated
+   */  
+  @RequestMapping(method = RequestMethod.POST,value="/{agendamentoId}/Servico")
+  public Agendamento postServico(@Validated @RequestBody final Servico entity, @PathVariable("agendamentoId") java.lang.String agendamentoId) throws Exception {
+    AgendamentoServico newAgendamentoServico = new AgendamentoServico();
+
+    Agendamento agendamento = this.agendamentoBusiness.get(agendamentoId);
+
+    newAgendamentoServico.setServico(entity);
+    newAgendamentoServico.setAgendamento(agendamento);
+    
+    this.agendamentoServicoBusiness.post(newAgendamentoServico);
+
+    return newAgendamentoServico.getAgendamento();
+  }   
+
+  /**
+   * ManyToMany Relationship DELETE
+   * @generated
+   */  
+  @RequestMapping(method = RequestMethod.DELETE,value="/{agendamentoId}/Servico/{ServicoId}")
+  public void deleteServico(@PathVariable("agendamentoId") java.lang.String agendamentoId, @PathVariable("ServicoId") java.lang.String ServicoId) {
+    this.agendamentoBusiness.deleteServico(agendamentoId, ServicoId);
+  }  
 
   /**
    * Serviço exposto para recuperar a entidade de acordo com o id fornecido
@@ -121,21 +204,12 @@ public class AgendamentoREST {
   }
 
   /**
-   * Foreign Key servico
-   * @generated
-   */
-  @RequestMapping(method = RequestMethod.GET, value="/Servico/{servicoId}")    
-  public HttpEntity<PagedResources<Agendamento>> findAgendamentosByServico(@PathVariable("servicoId") java.lang.String servicoId, Pageable pageable, PagedResourcesAssembler assembler) {
-    return new ResponseEntity<>(assembler.toResource(agendamentoBusiness.findAgendamentosByServico(servicoId, pageable)), HttpStatus.OK);
-  }
-
-  /**
    * Foreign Key cliente
    * @generated
    */
   @RequestMapping(method = RequestMethod.GET, value="/Cliente/{clienteId}")    
-  public HttpEntity<PagedResources<Agendamento>> findAgendamentosByCliente(@PathVariable("clienteId") java.lang.String clienteId, Pageable pageable, PagedResourcesAssembler assembler) {
-    return new ResponseEntity<>(assembler.toResource(agendamentoBusiness.findAgendamentosByCliente(clienteId, pageable)), HttpStatus.OK);
+  public HttpEntity<List<AgendamentoDTO>> findAgendamentosByCliente(@PathVariable("clienteId") java.lang.String clienteId, Pageable pageable, PagedResourcesAssembler assembler) {
+    return new ResponseEntity<>(agendamentoBusiness.findAgendamentosByCliente(clienteId, pageable), HttpStatus.OK);
   }
 
   /**
@@ -143,7 +217,13 @@ public class AgendamentoREST {
    * @generated
    */
   @RequestMapping(method = RequestMethod.GET, value="/Funcionario/{funcionarioId}")    
-  public HttpEntity<PagedResources<Agendamento>> findAgendamentosByFuncionario(@PathVariable("funcionarioId") java.lang.String funcionarioId, Pageable pageable, PagedResourcesAssembler assembler) {
-    return new ResponseEntity<>(assembler.toResource(agendamentoBusiness.findAgendamentosByFuncionario(funcionarioId, pageable)), HttpStatus.OK);
+  public HttpEntity<List<AgendamentoDTO>> findAgendamentosByFuncionario(@PathVariable("funcionarioId") java.lang.String funcionarioId, Pageable pageable, PagedResourcesAssembler assembler) {
+    return new ResponseEntity<>(agendamentoBusiness.findAgendamentosByFuncionario(funcionarioId, pageable), HttpStatus.OK);
   }
+  
+  @RequestMapping(method = RequestMethod.GET, value="/listByDataFutura")
+  public HttpEntity<List<AgendamentoDTO>> listByDataFutura(Pageable pageable, PagedResourcesAssembler assembler){
+    return new ResponseEntity<>(agendamentoBusiness.listByDataFutura(pageable), HttpStatus.OK);    
+  }
+  
 }

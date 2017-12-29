@@ -75,15 +75,28 @@ public interface AgendamentoDAO extends JpaRepository<Agendamento, java.lang.Str
   @Query("select a from Agendamento a where a.data = :data")
   public Page<Agendamento> listByData(@Param(value="data") java.util.Date data, Pageable pageable);
   
-  @Query("select a from Agendamento a where a.data > CURRENT_DATE")
-  public Page<Agendamento> listByDataFutura(Pageable pageable);
+
 
   /**
-   * Foreign Key servico
+   * OneToMany Relation
    * @generated
    */
-  @Query("SELECT entity FROM Agendamento entity WHERE entity.servico.id = :id")
-  public Page<Agendamento> findAgendamentosByServico(@Param(value="id") java.lang.String id, Pageable pageable);
+  @Query("SELECT entity FROM AgendamentoServico entity WHERE entity.agendamento.id = :id")
+  public Page<AgendamentoServico> findAgendamentoServico(@Param(value="id") java.lang.String id, Pageable pageable);
+  /**
+   * ManyToOne Relation
+   * @generated
+   */
+  @Query("SELECT entity.servico FROM AgendamentoServico entity WHERE entity.agendamento.id = :id")
+  public Page<Servico> listServico(@Param(value="id") java.lang.String id, Pageable pageable);
+
+  /**
+   * ManyToOne Relation Delete
+   * @generated
+   */
+  @Modifying
+  @Query("DELETE FROM AgendamentoServico entity WHERE entity.agendamento.id = :instanceId AND entity.servico.id = :relationId")
+  public int deleteServico(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
 
   /**
    * Foreign Key cliente
@@ -98,5 +111,8 @@ public interface AgendamentoDAO extends JpaRepository<Agendamento, java.lang.Str
    */
   @Query("SELECT entity FROM Agendamento entity WHERE entity.funcionario.id = :id")
   public Page<Agendamento> findAgendamentosByFuncionario(@Param(value="id") java.lang.String id, Pageable pageable);
+
+  @Query("select a from Agendamento a where a.data > CURRENT_DATE")
+  public Page<Agendamento> listByDataFutura(Pageable pageable);
 
 }

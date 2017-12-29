@@ -190,4 +190,29 @@ public class FuncionarioBusiness {
     // end-user-code  
     return result;  
   }
+  /**
+   * @generated modifiable
+   * ManyToMany Relation
+   */  
+  public Page<Cliente> listCliente_3(java.lang.String id, Pageable pageable) {
+    // begin-user-code
+    // end-user-code  
+    Page<Cliente> result = repository.listCliente_3(id, pageable);
+    // begin-user-code
+    // end-user-code
+    return result;            
+  }
+  
+  /**
+   * @generated modifiable
+   * ManyToMany Relation
+   */    
+  public int deleteCliente_3(java.lang.String instanceId, java.lang.String relationId) {
+    // begin-user-code
+    // end-user-code  
+    int result = repository.deleteCliente_3(instanceId, relationId);
+    // begin-user-code
+    // end-user-code  
+    return result;  
+  }
 }

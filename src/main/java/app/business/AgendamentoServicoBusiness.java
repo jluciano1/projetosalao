@@ -10,23 +10,23 @@ import app.dao.*;
 import app.entity.*;
 
 /**
- * Classe que representa a camada de negócios de ServicoBusiness
+ * Classe que representa a camada de negócios de AgendamentoServicoBusiness
  * 
  * @generated
  **/
-@Service("ServicoBusiness")
-public class ServicoBusiness {
+@Service("AgendamentoServicoBusiness")
+public class AgendamentoServicoBusiness {
 
 
 
   /**
-   * Instância da classe ServicoDAO que faz o acesso ao banco de dados
+   * Instância da classe AgendamentoServicoDAO que faz o acesso ao banco de dados
    * 
    * @generated
    */
   @Autowired
-  @Qualifier("ServicoDAO")
-  protected ServicoDAO repository;
+  @Qualifier("AgendamentoServicoDAO")
+  protected AgendamentoServicoDAO repository;
 
   // CRUD
 
@@ -35,10 +35,10 @@ public class ServicoBusiness {
    * 
    * @generated
    */
-  public Servico post(final Servico entity) throws Exception {
+  public AgendamentoServico post(final AgendamentoServico entity) throws Exception {
     // begin-user-code  
     // end-user-code  
-    Servico result = repository.save(entity);
+    AgendamentoServico result = repository.save(entity);
     // begin-user-code
     // end-user-code
     return result;
@@ -49,10 +49,10 @@ public class ServicoBusiness {
    * 
    * @generated
    */
-  public Servico put(final Servico entity) throws Exception {
+  public AgendamentoServico put(final AgendamentoServico entity) throws Exception {
     // begin-user-code  
     // end-user-code
-    Servico result = repository.saveAndFlush(entity);
+    AgendamentoServico result = repository.saveAndFlush(entity);
     // begin-user-code
     // end-user-code
     return result;
@@ -64,7 +64,7 @@ public class ServicoBusiness {
    * @generated
    */
   public void delete(java.lang.String id) throws Exception {
-    Servico entity = this.get(id);
+    AgendamentoServico entity = this.get(id);
     // begin-user-code  
     // end-user-code
     this.repository.delete(entity);
@@ -77,10 +77,10 @@ public class ServicoBusiness {
    * 
    * @generated
    */
-  public Servico get(java.lang.String id) throws Exception {
+  public AgendamentoServico get(java.lang.String id) throws Exception {
     // begin-user-code  
     // end-user-code
-    Servico result = repository.findOne(id);
+    AgendamentoServico result = repository.findOne(id);
     // begin-user-code
     // end-user-code
     return result;
@@ -93,50 +93,38 @@ public class ServicoBusiness {
    * 
    * @generated
    */
-  public Page<Servico> list(Pageable pageable){
+  public Page<AgendamentoServico> list(Pageable pageable){
     // begin-user-code
     // end-user-code
-    Page<Servico> result = repository.list(pageable);
+    Page<AgendamentoServico> result = repository.list(pageable);
     // begin-user-code
     // end-user-code
     return result;
   }
-  
   /**
-   * @generated modifiable
-   * OneToMany Relation
-   */  
-  public Page<AgendamentoServico> findAgendamentoServico(java.lang.String id, Pageable pageable) {
+   * Foreign Key agendamento
+   * @generated
+   */
+  public Page<AgendamentoServico> findAgendamentoServicosByAgendamento(java.lang.String instanceId, Pageable pageable) {
     // begin-user-code
     // end-user-code  
-    Page<AgendamentoServico> result = repository.findAgendamentoServico(id, pageable);
+    Page<AgendamentoServico> result = repository.findAgendamentoServicosByAgendamento(instanceId, pageable);
     // begin-user-code  
     // end-user-code        
-    return result;    
-  }
-  /**
-   * @generated modifiable
-   * ManyToMany Relation
-   */  
-  public Page<Agendamento> listAgendamento(java.lang.String id, Pageable pageable) {
-    // begin-user-code
-    // end-user-code  
-    Page<Agendamento> result = repository.listAgendamento(id, pageable);
-    // begin-user-code
-    // end-user-code
-    return result;            
+    return result;
   }
   
   /**
-   * @generated modifiable
-   * ManyToMany Relation
-   */    
-  public int deleteAgendamento(java.lang.String instanceId, java.lang.String relationId) {
+   * Foreign Key servico
+   * @generated
+   */
+  public Page<AgendamentoServico> findAgendamentoServicosByServico(java.lang.String instanceId, Pageable pageable) {
     // begin-user-code
     // end-user-code  
-    int result = repository.deleteAgendamento(instanceId, relationId);
-    // begin-user-code
-    // end-user-code  
-    return result;  
+    Page<AgendamentoServico> result = repository.findAgendamentoServicosByServico(instanceId, pageable);
+    // begin-user-code  
+    // end-user-code        
+    return result;
   }
+  
 }

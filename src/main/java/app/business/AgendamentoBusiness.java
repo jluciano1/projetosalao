@@ -1,13 +1,19 @@
 package app.business;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import java.util.*;
-import app.dao.*;
-import app.entity.*;
+
+import app.dao.AgendamentoDAO;
+import app.entity.Agendamento;
+import app.entity.AgendamentoDTO;
+import app.entity.AgendamentoServico;
+import app.entity.Servico;
 
 /**
  * Classe que representa a camada de negócios de AgendamentoBusiness
@@ -17,28 +23,27 @@ import app.entity.*;
 @Service("AgendamentoBusiness")
 public class AgendamentoBusiness {
 
-
-
-  /**
-   * Instância da classe AgendamentoDAO que faz o acesso ao banco de dados
-   * 
-   * @generated
-   */
   @Autowired
   @Qualifier("AgendamentoDAO")
   protected AgendamentoDAO repository;
+  
+  @Autowired
+  @Qualifier("AgendamentoServicoBusiness")
+  protected AgendamentoServicoBusiness agendaServBuss;
 
-  // CRUD
-
-  /**
-   * Serviço exposto para novo registro de acordo com a entidade fornecida
-   * 
-   * @generated
-   */
   public Agendamento post(final Agendamento entity) throws Exception {
     // begin-user-code  
     // end-user-code  
     Agendamento result = repository.save(entity);
+    
+    List<AgendamentoServico> listaS = agendaServBuss.findAgendamentoServicosByAgendamento(result.getId(), null).getContent();
+    double total = 0.0;
+    for (AgendamentoServico j : listaS)
+    {
+      total += j.getServico().getValorServico();
+    }
+    result.setValorTotal(total);  
+    
     // begin-user-code
     // end-user-code
     return result;
@@ -53,6 +58,16 @@ public class AgendamentoBusiness {
     // begin-user-code  
     // end-user-code
     Agendamento result = repository.saveAndFlush(entity);
+    
+    List<AgendamentoServico> listaS = agendaServBuss.findAgendamentoServicosByAgendamento(result.getId(), null).getContent();
+    double total = 0.0;
+    for (AgendamentoServico j : listaS)
+    {
+      total += j.getServico().getValorServico();
+    }
+    result.setValorTotal(total);  
+    
+    
     // begin-user-code
     // end-user-code
     return result;
@@ -97,6 +112,16 @@ public class AgendamentoBusiness {
     // begin-user-code
     // end-user-code
     Page<Agendamento> result = repository.list(pageable);
+    for (Agendamento i : result.getContent())
+    {
+      List<AgendamentoServico> listaS = agendaServBuss.findAgendamentoServicosByAgendamento(i.getId(), pageable).getContent();
+      double total = 0.0;
+      for (AgendamentoServico j : listaS)
+      {
+        total += j.getServico().getValorServico();
+      }
+      i.setValorTotal(total);  
+    }
     // begin-user-code
     // end-user-code
     return result;
@@ -141,52 +166,140 @@ public class AgendamentoBusiness {
     return result;
   }
   
-  public Page<Agendamento> listByDataFutura(Pageable pageable){
+  /**
+   * @generated modifiable
+   * OneToMany Relation
+   */  
+  public Page<AgendamentoServico> findAgendamentoServico(java.lang.String id, Pageable pageable) {
+    // begin-user-code
+    // end-user-code  
+    Page<AgendamentoServico> result = repository.findAgendamentoServico(id, pageable);
+    // begin-user-code  
+    // end-user-code        
+    return result;    
+  }
+  /**
+   * @generated modifiable
+   * ManyToMany Relation
+   */  
+  public Page<Servico> listServico(java.lang.String id, Pageable pageable) {
+    // begin-user-code
+    // end-user-code  
+    Page<Servico> result = repository.listServico(id, pageable);
     // begin-user-code
     // end-user-code
-    Page<Agendamento> result = repository.listByDataFutura(pageable);
-    // begin-user-code
-    // end-user-code
-    return result;
+    return result;            
   }
   
   /**
-   * Foreign Key servico
-   * @generated
-   */
-  public Page<Agendamento> findAgendamentosByServico(java.lang.String instanceId, Pageable pageable) {
+   * @generated modifiable
+   * ManyToMany Relation
+   */    
+  public int deleteServico(java.lang.String instanceId, java.lang.String relationId) {
     // begin-user-code
     // end-user-code  
-    Page<Agendamento> result = repository.findAgendamentosByServico(instanceId, pageable);
-    // begin-user-code  
-    // end-user-code        
-    return result;
+    int result = repository.deleteServico(instanceId, relationId);
+    // begin-user-code
+    // end-user-code  
+    return result;  
   }
-  
   /**
    * Foreign Key cliente
    * @generated
    */
-  public Page<Agendamento> findAgendamentosByCliente(java.lang.String instanceId, Pageable pageable) {
+  public List<AgendamentoDTO> findAgendamentosByCliente(java.lang.String instanceId, Pageable pageable) {
     // begin-user-code
     // end-user-code  
     Page<Agendamento> result = repository.findAgendamentosByCliente(instanceId, pageable);
-    // begin-user-code  
-    // end-user-code        
-    return result;
+    List<AgendamentoDTO> res = new ArrayList<AgendamentoDTO>();
+    for (Agendamento i : result.getContent())
+    {
+      AgendamentoDTO dto = new AgendamentoDTO();
+      dto.setValorTotal(i.getValorTotal());
+      dto.setId(i.getId());
+      dto.setHora(i.getHora());
+      dto.setFuncionario(i.getFuncionario());
+      dto.setData(i.getData());
+      dto.setCliente(i.getCliente());
+      List<AgendamentoServico> listaS = agendaServBuss.findAgendamentoServicosByAgendamento(i.getId(), pageable).getContent();
+      double total = 0.0;
+      for (AgendamentoServico j : listaS)
+      {
+        total += j.getServico().getValorServico();
+      }
+      dto.setServicos(listaS);
+      dto.setValorTotal(total);
+      res.add(dto);
+    }
+    
+    // begin-user-code
+    // end-user-code
+    return res;
   }
   
   /**
    * Foreign Key funcionario
    * @generated
    */
-  public Page<Agendamento> findAgendamentosByFuncionario(java.lang.String instanceId, Pageable pageable) {
+  public List<AgendamentoDTO> findAgendamentosByFuncionario(java.lang.String instanceId, Pageable pageable) {
     // begin-user-code
     // end-user-code  
     Page<Agendamento> result = repository.findAgendamentosByFuncionario(instanceId, pageable);
-    // begin-user-code  
-    // end-user-code        
-    return result;
+    List<AgendamentoDTO> res = new ArrayList<AgendamentoDTO>();
+    for (Agendamento i : result.getContent())
+    {
+      AgendamentoDTO dto = new AgendamentoDTO();
+      dto.setValorTotal(i.getValorTotal());
+      dto.setId(i.getId());
+      dto.setHora(i.getHora());
+      dto.setFuncionario(i.getFuncionario());
+      dto.setData(i.getData());
+      dto.setCliente(i.getCliente());
+      List<AgendamentoServico> listaS = agendaServBuss.findAgendamentoServicosByAgendamento(i.getId(), pageable).getContent();
+      double total = 0.0;
+      for (AgendamentoServico j : listaS)
+      {
+        total += j.getServico().getValorServico();
+      }
+      dto.setServicos(listaS);
+      dto.setValorTotal(total);
+      
+      res.add(dto);
+    }
+    
+    // begin-user-code
+    // end-user-code
+    return res;
+  }
+  
+  public List<AgendamentoDTO> listByDataFutura(Pageable pageable){
+    // begin-user-code
+    // end-user-code
+    Page<Agendamento> result = repository.listByDataFutura(pageable);
+    List<AgendamentoDTO> res = new ArrayList<AgendamentoDTO>();
+    for (Agendamento i : result.getContent())
+    {
+      AgendamentoDTO dto = new AgendamentoDTO();
+      dto.setValorTotal(i.getValorTotal());
+      dto.setId(i.getId());
+      dto.setHora(i.getHora());
+      dto.setFuncionario(i.getFuncionario());
+      dto.setData(i.getData());
+      dto.setCliente(i.getCliente());
+      List<AgendamentoServico> listaS = agendaServBuss.findAgendamentoServicosByAgendamento(i.getId(), pageable).getContent();
+      double total = 0.0;
+      for (AgendamentoServico j : listaS)
+      {
+        total += j.getServico().getValorServico();
+      }
+      dto.setServicos(listaS);
+      dto.setValorTotal(total);
+      res.add(dto);
+    }
+    
+    // begin-user-code
+    // end-user-code
+    return res;
   }
   
 }

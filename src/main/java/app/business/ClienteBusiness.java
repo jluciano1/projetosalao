@@ -190,4 +190,29 @@ public class ClienteBusiness {
     // end-user-code  
     return result;  
   }
+  /**
+   * @generated modifiable
+   * ManyToMany Relation
+   */  
+  public Page<Funcionario> listFuncionario_3(java.lang.String id, Pageable pageable) {
+    // begin-user-code
+    // end-user-code  
+    Page<Funcionario> result = repository.listFuncionario_3(id, pageable);
+    // begin-user-code
+    // end-user-code
+    return result;            
+  }
+  
+  /**
+   * @generated modifiable
+   * ManyToMany Relation
+   */    
+  public int deleteFuncionario_3(java.lang.String instanceId, java.lang.String relationId) {
+    // begin-user-code
+    // end-user-code  
+    int result = repository.deleteFuncionario_3(instanceId, relationId);
+    // begin-user-code
+    // end-user-code  
+    return result;  
+  }
 }

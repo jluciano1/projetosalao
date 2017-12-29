@@ -50,13 +50,6 @@ public class Agendamento implements Serializable {
   * @generated
   */
   @ManyToOne
-  @JoinColumn(name="fk_servico", nullable = true, referencedColumnName = "id", insertable=true, updatable=true)
-  private Servico servico;
-  
-  /**
-  * @generated
-  */
-  @ManyToOne
   @JoinColumn(name="fk_cliente", nullable = true, referencedColumnName = "id", insertable=true, updatable=true)
   private Cliente cliente;
   
@@ -148,25 +141,6 @@ public class Agendamento implements Serializable {
    */
   public Agendamento setValorTotal(java.lang.Double valorTotal){
     this.valorTotal = valorTotal;
-    return this;
-  }
-  
-  /**
-   * Obtém servico
-   * return servico
-   * @generated
-   */
-  public Servico getServico(){
-    return this.servico;
-  }
-  
-  /**
-   * Define servico
-   * @param servico servico
-   * @generated
-   */
-  public Agendamento setServico(Servico servico){
-    this.servico = servico;
     return this;
   }
   

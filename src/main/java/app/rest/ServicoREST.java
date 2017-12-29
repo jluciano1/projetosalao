@@ -37,6 +37,13 @@ public class ServicoREST {
   private AgendamentoBusiness agendamentoBusiness;
 
   /**
+   * @generated
+   */
+  @Autowired
+  @Qualifier("AgendamentoServicoBusiness")
+  private AgendamentoServicoBusiness agendamentoServicoBusiness;
+
+  /**
    * Serviço exposto para novo registro de acordo com a entidade fornecida
    * 
    * @generated
@@ -89,39 +96,75 @@ public class ServicoREST {
    * OneToMany Relationship GET
    * @generated
    */
-  @RequestMapping(method = RequestMethod.GET, value="/{servicoId}/Agendamento")    
-  public HttpEntity<PagedResources<Agendamento>> findAgendamento(@PathVariable("servicoId") java.lang.String servicoId, Pageable pageable, PagedResourcesAssembler assembler) {
-    return new ResponseEntity<>(assembler.toResource(servicoBusiness.findAgendamento(servicoId, pageable)), HttpStatus.OK);
+  @RequestMapping(method = RequestMethod.GET, value="/{servicoId}/AgendamentoServico")    
+  public HttpEntity<PagedResources<AgendamentoServico>> findAgendamentoServico(@PathVariable("servicoId") java.lang.String servicoId, Pageable pageable, PagedResourcesAssembler assembler) {
+    return new ResponseEntity<>(assembler.toResource(servicoBusiness.findAgendamentoServico(servicoId, pageable)), HttpStatus.OK);
   }
 
   /**
    * OneToMany Relationship DELETE 
    * @generated
    */  
-  @RequestMapping(method = RequestMethod.DELETE, value="/{servicoId}/Agendamento/{agendamentoId}")    
-  public void deleteAgendamento(@PathVariable("agendamentoId") java.lang.String agendamentoId) throws Exception {
-    this.agendamentoBusiness.delete(agendamentoId);
+  @RequestMapping(method = RequestMethod.DELETE, value="/{servicoId}/AgendamentoServico/{agendamentoServicoId}")    
+  public void deleteAgendamentoServico(@PathVariable("agendamentoServicoId") java.lang.String agendamentoServicoId) throws Exception {
+    this.agendamentoServicoBusiness.delete(agendamentoServicoId);
   }
   
   /**
    * OneToMany Relationship PUT
    * @generated
    */  
-  @RequestMapping(method = RequestMethod.PUT, value="/{servicoId}/Agendamento")
-  public Agendamento putAgendamento(@Validated @RequestBody final Agendamento entity, @PathVariable("servicoId") java.lang.String servicoId) throws Exception {
-    return this.agendamentoBusiness.put(entity);
+  @RequestMapping(method = RequestMethod.PUT, value="/{servicoId}/AgendamentoServico")
+  public AgendamentoServico putAgendamentoServico(@Validated @RequestBody final AgendamentoServico entity, @PathVariable("servicoId") java.lang.String servicoId) throws Exception {
+    return this.agendamentoServicoBusiness.put(entity);
   }  
   
   /**
    * OneToMany Relationship POST
    * @generated
    */  
-  @RequestMapping(method = RequestMethod.POST, value="/{servicoId}/Agendamento")
-  public Agendamento postAgendamento(@Validated @RequestBody final Agendamento entity, @PathVariable("servicoId") java.lang.String servicoId) throws Exception {
+  @RequestMapping(method = RequestMethod.POST, value="/{servicoId}/AgendamentoServico")
+  public AgendamentoServico postAgendamentoServico(@Validated @RequestBody final AgendamentoServico entity, @PathVariable("servicoId") java.lang.String servicoId) throws Exception {
     Servico servico = this.servicoBusiness.get(servicoId);
     entity.setServico(servico);
-    return this.agendamentoBusiness.post(entity);
+    return this.agendamentoServicoBusiness.post(entity);
   }
+
+  /**
+   * ManyToMany Relationship GET
+   * @generated
+   */
+  @RequestMapping(method = RequestMethod.GET,value="/{servicoId}/Agendamento")
+  public HttpEntity<PagedResources<Agendamento>> listAgendamento(@PathVariable("servicoId") java.lang.String servicoId, Pageable pageable, PagedResourcesAssembler assembler) {
+    return new ResponseEntity<>(assembler.toResource(servicoBusiness.listAgendamento(servicoId, pageable)), HttpStatus.OK); 
+  }
+
+  /**
+   * ManyToMany Relationship POST
+   * @generated
+   */  
+  @RequestMapping(method = RequestMethod.POST,value="/{servicoId}/Agendamento")
+  public Servico postAgendamento(@Validated @RequestBody final Agendamento entity, @PathVariable("servicoId") java.lang.String servicoId) throws Exception {
+    AgendamentoServico newAgendamentoServico = new AgendamentoServico();
+
+    Servico servico = this.servicoBusiness.get(servicoId);
+
+    newAgendamentoServico.setAgendamento(entity);
+    newAgendamentoServico.setServico(servico);
+    
+    this.agendamentoServicoBusiness.post(newAgendamentoServico);
+
+    return newAgendamentoServico.getServico();
+  }   
+
+  /**
+   * ManyToMany Relationship DELETE
+   * @generated
+   */  
+  @RequestMapping(method = RequestMethod.DELETE,value="/{servicoId}/Agendamento/{AgendamentoId}")
+  public void deleteAgendamento(@PathVariable("servicoId") java.lang.String servicoId, @PathVariable("AgendamentoId") java.lang.String AgendamentoId) {
+    this.servicoBusiness.deleteAgendamento(servicoId, AgendamentoId);
+  }  
 
   /**
    * Serviço exposto para recuperar a entidade de acordo com o id fornecido

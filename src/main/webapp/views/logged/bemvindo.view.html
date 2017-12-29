@@ -44,8 +44,8 @@ Próximos horários agendados:
                     </div>
                 </td>
                 <td class="">
-                    <div class="">
-                            {{rowData.servico.nome}}
+                    <div ng-repeat="servico in rowData.servicos" class="">
+                            {{servico.servico.nome}}
                     </div>
                 </td>
                 <td class="">
